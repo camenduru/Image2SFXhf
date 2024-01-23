@@ -47,9 +47,10 @@ def get_caption(image_in):
 
 def get_magnet(prompt):
     amended_prompt = f"No Music. {prompt}"
+    print(amended_prompt)
     client = Client("https://fffiloni-magnet.hf.space/--replicas/oo8sb/")
     result = client.predict(
-        "facebook/magnet-small-10secs",	# Literal['facebook/magnet-small-10secs', 'facebook/magnet-medium-10secs', 'facebook/magnet-small-30secs', 'facebook/magnet-medium-30secs', 'facebook/audio-magnet-small', 'facebook/audio-magnet-medium']  in 'Model' Radio component
+        "facebook/audio-magnet-small",	# Literal['facebook/magnet-small-10secs', 'facebook/magnet-medium-10secs', 'facebook/magnet-small-30secs', 'facebook/magnet-medium-30secs', 'facebook/audio-magnet-small', 'facebook/audio-magnet-medium']  in 'Model' Radio component
         "",	# str  in 'Model Path (custom models)' Textbox component
         amended_prompt,	# str  in 'Input Text' Textbox component
         3,	# float  in 'Temperature' Number component
@@ -67,9 +68,11 @@ def get_magnet(prompt):
     return result[0]['video']
 
 def get_audioldm(prompt):
+    amended_prompt = f"No Music. {prompt}"
+    print(amended_prompt)
     client = Client("https://haoheliu-audioldm2-text2audio-text2music.hf.space/")
     result = client.predict(
-        prompt,	# str in 'Input text' Textbox component
+        amended_prompt,	# str in 'Input text' Textbox component
         "Low quality. Music.",	# str in 'Negative prompt' Textbox component
         5,	# int | float (numeric value between 5 and 15) in 'Duration (seconds)' Slider component
         0,	# int | float (numeric value between 0 and 7) in 'Guidance scale' Slider component
