@@ -68,7 +68,6 @@ def get_magnet(prompt):
     return result[0]['video']
 
 def get_audioldm(prompt):
-    print(amended_prompt)
     client = Client("https://haoheliu-audioldm2-text2audio-text2music.hf.space/")
     result = client.predict(
         prompt,	# str in 'Input text' Textbox component
@@ -98,13 +97,13 @@ with gr.Blocks() as demo:
             Compare MAGNet and AudioLDM2 sound effects generation from image caption (Kosmos2)
         </p>
         """)
+        
+        with gr.Column():
+            image_in = gr.Image(sources=["upload"], type="filepath", label="Image input")
+            submit_btn = gr.Button("Submit")
         with gr.Row():
-            with gr.Column():
-                image_in = gr.Image(sources=["upload"], type="filepath", label="Image input")
-                submit_btn = gr.Button("Submit")
-            with gr.Column():
-                magnet_o = gr.Video(label="MAGNet output")
-                audioldm2_o = gr.Video(label="AudioLDM2 output")
+            magnet_o = gr.Video(label="MAGNet output")
+            audioldm2_o = gr.Video(label="AudioLDM2 output")
     submit_btn.click(
         fn=infer,
         inputs=[image_in],
