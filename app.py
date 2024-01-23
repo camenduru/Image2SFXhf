@@ -68,11 +68,10 @@ def get_magnet(prompt):
     return result[0]['video']
 
 def get_audioldm(prompt):
-    amended_prompt = f"No Music. {prompt}"
     print(amended_prompt)
     client = Client("https://haoheliu-audioldm2-text2audio-text2music.hf.space/")
     result = client.predict(
-        amended_prompt,	# str in 'Input text' Textbox component
+        prompt,	# str in 'Input text' Textbox component
         "Low quality. Music.",	# str in 'Negative prompt' Textbox component
         10,	# int | float (numeric value between 5 and 15) in 'Duration (seconds)' Slider component
         3.5,	# int | float (numeric value between 0 and 7) in 'Guidance scale' Slider component
