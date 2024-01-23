@@ -1,6 +1,6 @@
 ---
 title: Image2SFX Comparison
-emoji: 🐢
+emoji: 👂
 colorFrom: green
 colorTo: pink
 sdk: gradio
