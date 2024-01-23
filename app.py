@@ -87,8 +87,15 @@ def infer(image_in):
     audioldm_result = get_audioldm(caption)
     return magnet_result, audioldm_result
 
-with gr.Blocks() as demo:
-    with gr.Column():
+css="""
+#col-container{
+    margin: 0 auto;
+    max-width: 720px;
+}
+"""
+
+with gr.Blocks(css=css) as demo:
+    with gr.Column(elem_id="col-container"):
         gr.HTML("""
         <h2 style="text-align: center;">
             Image to SFX
