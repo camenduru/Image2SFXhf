@@ -74,10 +74,10 @@ def get_audioldm(prompt):
     result = client.predict(
         amended_prompt,	# str in 'Input text' Textbox component
         "Low quality. Music.",	# str in 'Negative prompt' Textbox component
-        5,	# int | float (numeric value between 5 and 15) in 'Duration (seconds)' Slider component
-        0,	# int | float (numeric value between 0 and 7) in 'Guidance scale' Slider component
-        5,	# int | float in 'Seed' Number component
-        1,	# int | float (numeric value between 1 and 5) in 'Number waveforms to generate' Slider component
+        10,	# int | float (numeric value between 5 and 15) in 'Duration (seconds)' Slider component
+        3.5,	# int | float (numeric value between 0 and 7) in 'Guidance scale' Slider component
+        45,	# int | float in 'Seed' Number component
+        3,	# int | float (numeric value between 1 and 5) in 'Number waveforms to generate' Slider component
         fn_index=1
     )
     print(result)
