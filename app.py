@@ -50,7 +50,7 @@ def get_magnet(prompt):
     client = Client("https://fffiloni-magnet.hf.space/--replicas/oo8sb/")
     result = client.predict(
         "facebook/magnet-small-10secs",	# Literal['facebook/magnet-small-10secs', 'facebook/magnet-medium-10secs', 'facebook/magnet-small-30secs', 'facebook/magnet-medium-30secs', 'facebook/audio-magnet-small', 'facebook/audio-magnet-medium']  in 'Model' Radio component
-        None,	# str  in 'Model Path (custom models)' Textbox component
+        "",	# str  in 'Model Path (custom models)' Textbox component
         amended_prompt,	# str  in 'Input Text' Textbox component
         3,	# float  in 'Temperature' Number component
         0.9,	# float  in 'Top-p' Number component
