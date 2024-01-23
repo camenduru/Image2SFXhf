@@ -106,7 +106,7 @@ with gr.Blocks(css=css) as demo:
         """)
         
         with gr.Column():
-            image_in = gr.Image(sources=["upload"], type="filepath", label="Image input")
+            image_in = gr.Image(sources=["upload"], type="filepath", label="Image input", value="oiseau.png")
             submit_btn = gr.Button("Submit")
         with gr.Row():
             magnet_o = gr.Video(label="MAGNet output")
