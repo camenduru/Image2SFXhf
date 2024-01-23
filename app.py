@@ -35,15 +35,15 @@ def get_caption(image_in):
         print("Unable to locate valid description.")
 
     # Find the last occurrence of "."
-    #last_period_index = full_sentence.rfind('.')
+    last_period_index = description.rfind('.')
 
     # Truncate the string up to the last period
-    #truncated_caption = full_sentence[:last_period_index + 1]
+    truncated_caption = description[:last_period_index + 1]
 
     # print(truncated_caption)
-    #print(f"\n—\nIMAGE CAPTION: {truncated_caption}")
+    print(f"\n—\nIMAGE CAPTION: {truncated_caption}")
     
-    return description
+    return truncated_caption
 
 def get_magnet(prompt):
     amended_prompt = f"High quality sound effects. {prompt}"
