@@ -56,11 +56,11 @@ def get_caption(image_in):
     return result
 
 def get_magnet(prompt):
-    amended_prompt = f"High quality sound effects. {prompt}"
+    amended_prompt = f"{prompt}"
     print(amended_prompt)
     client = Client("https://fffiloni-magnet.hf.space/--replicas/oo8sb/")
     result = client.predict(
-        "facebook/audio-magnet-small",	# Literal['facebook/magnet-small-10secs', 'facebook/magnet-medium-10secs', 'facebook/magnet-small-30secs', 'facebook/magnet-medium-30secs', 'facebook/audio-magnet-small', 'facebook/audio-magnet-medium']  in 'Model' Radio component
+        "facebook/audio-magnet-medium",	# Literal['facebook/magnet-small-10secs', 'facebook/magnet-medium-10secs', 'facebook/magnet-small-30secs', 'facebook/magnet-medium-30secs', 'facebook/audio-magnet-small', 'facebook/audio-magnet-medium']  in 'Model' Radio component
         "",	# str  in 'Model Path (custom models)' Textbox component
         amended_prompt,	# str  in 'Input Text' Textbox component
         3,	# float  in 'Temperature' Number component
