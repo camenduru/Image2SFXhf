@@ -64,7 +64,7 @@ def get_magnet(prompt):
         api_name="/predict_full"
     )
     print(result)
-    return result[0]
+    return result[0]['video']
 
 def get_audioldm(prompt):
     client = Client("https://haoheliu-audioldm2-text2audio-text2music.hf.space/")
