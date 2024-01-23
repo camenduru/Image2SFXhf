@@ -46,7 +46,7 @@ def get_caption(image_in):
     return description
 
 def get_magnet(prompt):
-    amended_prompt = f"No Music. {prompt}"
+    amended_prompt = f"High quality sound effects. {prompt}"
     print(amended_prompt)
     client = Client("https://fffiloni-magnet.hf.space/--replicas/oo8sb/")
     result = client.predict(
