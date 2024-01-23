@@ -101,5 +101,9 @@ with gr.Blocks() as demo:
             with gr.Column():
                 magnet_o = gr.Video(label="MAGNet output")
                 audioldm2_o = gr.Video(label="AudioLDM2 output")
-
+    submit_btn.click(
+        fn=infer,
+        inputs=[image_in],
+        outputs=[magnet_o, audioldm2_o]
+    )
 demo.queue(max_size=10).launch(debug=True)
