@@ -3,7 +3,7 @@ from gradio_client import Client
 import json
 import re
 
-def get_caption(image_in):
+def get_caption_from_kosmos(image_in):
     kosmos2_client = Client("https://ydshieh-kosmos-2.hf.space/")
 
     kosmos2_result = kosmos2_client.predict(
@@ -44,6 +44,16 @@ def get_caption(image_in):
     print(f"\n—\nIMAGE CAPTION: {truncated_caption}")
     
     return truncated_caption
+
+def get_caption(image_in):
+    client = Client("https://vikhyatk-moondream1.hf.space/--replicas/ggrds/")
+    result = client.predict(
+		image_in,	# filepath  in 'image' Image component
+		"Describe precisely the image in one sentence.",	# str  in 'Question' Textbox component
+		api_name="/predict"
+    )
+    print(result)
+    return result
 
 def get_magnet(prompt):
     amended_prompt = f"High quality sound effects. {prompt}"
@@ -101,7 +111,7 @@ with gr.Blocks(css=css) as demo:
             Image to SFX
         </h2>
         <p style="text-align: center;">
-            Compare MAGNet and AudioLDM2 sound effects generation from image caption (Kosmos2)
+            Compare MAGNet and AudioLDM2 sound effects generation from image caption.
         </p>
         """)
         
