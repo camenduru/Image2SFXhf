@@ -143,15 +143,16 @@ with gr.Blocks(css=css) as demo:
             Image to SFX
         </h2>
         <p style="text-align: center;">
-            Compare MAGNet and AudioLDM2 sound effects generation from image caption.
+            Compare MAGNet, AudioLDM2 and AudioGen sound effects generation from image caption.
         </p>
         """)
         
         with gr.Column():
             image_in = gr.Image(sources=["upload"], type="filepath", label="Image input", value="oiseau.png")
-            chosen_model = gr.Radio(label="Choose a model", choices=["MAGNet", "AudioLDM-2", "AudioGen"], value="AudioLDM-2")
-            submit_btn = gr.Button("Submit")
-        with gr.Row():
+            with gr.Row():
+                chosen_model = gr.Radio(label="Choose a model", choices=["MAGNet", "AudioLDM-2", "AudioGen"], value="AudioLDM-2")
+                submit_btn = gr.Button("Submit")
+        with gr.Column():
             audio_o = gr.Audio(label="Audio output")
     
     submit_btn.click(
