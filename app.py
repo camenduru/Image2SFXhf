@@ -2,6 +2,22 @@ import gradio as gr
 from gradio_client import Client
 import json
 import re
+from moviepy.editor import VideoFileClip
+from moviepy.audio.AudioClip import AudioClip
+
+def extract_audio(video_in):
+    input_video = video_in
+    output_audio = 'audio.wav'
+    
+    # Open the video file and extract the audio
+    video_clip = VideoFileClip(input_video)
+    audio_clip = video_clip.audio
+    
+    # Save the audio as a .wav file
+    audio_clip.write_audiofile(output_audio, fps=44100)  # Use 44100 Hz as the sample rate for .wav files  
+    print("Audio extraction complete.")
+
+    return 'audio.wav'
 
 def get_caption_from_kosmos(image_in):
     kosmos2_client = Client("https://ydshieh-kosmos-2.hf.space/")
@@ -75,7 +91,7 @@ def get_magnet(prompt):
         api_name="/predict_full"
     )
     print(result)
-    return result[0]['video']
+    return result[1]
 
 def get_audioldm(prompt):
     client = Client("https://haoheliu-audioldm2-text2audio-text2music.hf.space/")
@@ -89,13 +105,29 @@ def get_audioldm(prompt):
         fn_index=1
     )
     print(result)
+    audio_result = extract_audio(result)
+    return audio_result
+
+def get_audiogen(prompt):
+    client = Client("https://fffiloni-audiogen.hf.space/")
+    result = client.predict(
+        prompt,
+        10,
+        api_name="/infer"
+    )
     return result
 
-def infer(image_in):
+def infer(image_in, chosen_model):
     caption = get_caption(image_in)
-    magnet_result = get_magnet(caption)
-    audioldm_result = get_audioldm(caption)
-    return magnet_result, audioldm_result
+    if chosen_model == "MAGNet" :
+        magnet_result = get_magnet(caption)
+        return magnet_result
+    elif chosen_model == "AudioLDM-2" : 
+        audioldm_result = get_audioldm(caption)
+        return audioldm_result
+    elif chosen_model == "AudioGen" :
+        audiogen_result = get_audiogen(caption)
+        return audiogen_result
 
 css="""
 #col-container{
@@ -117,13 +149,15 @@ with gr.Blocks(css=css) as demo:
         
         with gr.Column():
             image_in = gr.Image(sources=["upload"], type="filepath", label="Image input", value="oiseau.png")
+            chosen_model = gr.Radio(label="Choose a model", choices=["MAGNet", "AudioLDM-2", "AudioGen"], value="AudioLDM-2")
             submit_btn = gr.Button("Submit")
         with gr.Row():
-            magnet_o = gr.Video(label="MAGNet output")
-            audioldm2_o = gr.Video(label="AudioLDM2 output")
+            audio_o = gr.Audio(label="Audio output")
+    
     submit_btn.click(
         fn=infer,
-        inputs=[image_in],
-        outputs=[magnet_o, audioldm2_o]
+        inputs=[image_in, chosen_model],
+        outputs=[audio_o]
     )
+
 demo.queue(max_size=10).launch(debug=True)
