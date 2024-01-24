@@ -132,7 +132,7 @@ def infer(image_in, chosen_model):
 css="""
 #col-container{
     margin: 0 auto;
-    max-width: 720px;
+    max-width: 800px;
 }
 """
 
