@@ -158,7 +158,8 @@ with gr.Blocks(css=css) as demo:
     submit_btn.click(
         fn=infer,
         inputs=[image_in, chosen_model],
-        outputs=[audio_o]
+        outputs=[audio_o],
+        concurrency_limit = 4
     )
 
 demo.queue(max_size=10).launch(debug=True)
