@@ -159,7 +159,7 @@ with gr.Blocks(css=css) as demo:
         fn=infer,
         inputs=[image_in, chosen_model],
         outputs=[audio_o],
-        concurrency_limit = 4
+        concurrency_limit = 2
     )
 
 demo.queue(max_size=10).launch(debug=True)
