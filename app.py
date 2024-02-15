@@ -122,7 +122,11 @@ def get_audiogen(prompt):
     return result
 
 def get_tango(prompt):
-    client = Client("https://declare-lab-tango.hf.space/")
+    try:
+        client = Client("https://declare-lab-tango.hf.space/")
+    except:
+        raise gr.Error("Tango space API is not ready, please try again in few minutes ")
+    
     result = client.predict(
 				prompt,	# str representing string value in 'Prompt' Textbox component
 				100,	# int | float representing numeric value between 100 and 200 in 'Steps' Slider component
