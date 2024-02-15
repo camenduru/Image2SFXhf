@@ -138,6 +138,7 @@ def get_tango(prompt):
 
 def infer(image_in, chosen_model):
     caption = get_caption(image_in)
+    caption = f"the sound of {caption}"
     if chosen_model == "MAGNet" :
         magnet_result = get_magnet(caption)
         return magnet_result
