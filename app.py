@@ -1,5 +1,6 @@
 import gradio as gr
 from gradio_client import Client
+import os
 import json
 import re
 from moviepy.editor import VideoFileClip
@@ -120,7 +121,7 @@ def get_audiogen(prompt):
 def get_tango(prompt):
     client = Client("https://declare-lab-tango.hf.space/")
     result = client.predict(
-				"Howdy!",	# str representing string value in 'Prompt' Textbox component
+				prompt,	# str representing string value in 'Prompt' Textbox component
 				100,	# int | float representing numeric value between 100 and 200 in 'Steps' Slider component
 				4,	# int | float representing numeric value between 1 and 10 in 'Guidance Scale' Slider component
 				api_name="/predict"
