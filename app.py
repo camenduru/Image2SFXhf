@@ -117,6 +117,17 @@ def get_audiogen(prompt):
     )
     return result
 
+def get_tango(prompt):
+    client = Client("https://declare-lab-tango.hf.space/")
+    result = client.predict(
+				"Howdy!",	# str representing string value in 'Prompt' Textbox component
+				100,	# int | float representing numeric value between 100 and 200 in 'Steps' Slider component
+				4,	# int | float representing numeric value between 1 and 10 in 'Guidance Scale' Slider component
+				api_name="/predict"
+    )
+    print(result)
+    return result
+
 def infer(image_in, chosen_model):
     caption = get_caption(image_in)
     if chosen_model == "MAGNet" :
@@ -128,6 +139,9 @@ def infer(image_in, chosen_model):
     elif chosen_model == "AudioGen" :
         audiogen_result = get_audiogen(caption)
         return audiogen_result
+    elif chosen_model == "Tango" :
+        tango_result = get_tango(caption)
+        return tango_result
 
 css="""
 #col-container{
@@ -150,7 +164,7 @@ with gr.Blocks(css=css) as demo:
         with gr.Column():
             image_in = gr.Image(sources=["upload"], type="filepath", label="Image input", value="oiseau.png")
             with gr.Row():
-                chosen_model = gr.Radio(label="Choose a model", choices=["MAGNet", "AudioLDM-2", "AudioGen"], value="AudioLDM-2")
+                chosen_model = gr.Dropdown(label="Choose a model", choices=["MAGNet", "AudioLDM-2", "AudioGen", "Tango"], value="AudioLDM-2")
                 submit_btn = gr.Button("Submit")
         with gr.Column():
             audio_o = gr.Audio(label="Audio output")
