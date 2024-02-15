@@ -6,6 +6,8 @@ import re
 from moviepy.editor import VideoFileClip
 from moviepy.audio.AudioClip import AudioClip
 
+hf_token = os.environ.get("HF_TKN")
+
 def extract_audio(video_in):
     input_video = video_in
     output_audio = 'audio.wav'
@@ -63,7 +65,7 @@ def get_caption_from_kosmos(image_in):
     return truncated_caption
 
 def get_caption(image_in):
-    client = Client("https://vikhyatk-moondream1.hf.space/")
+    client = Client("https://fffilon-moondream1.hf.space/", hf_token=hf_token)
     result = client.predict(
 		image_in,	# filepath  in 'image' Image component
 		"Describe precisely the image in one sentence.",	# str  in 'Question' Textbox component
