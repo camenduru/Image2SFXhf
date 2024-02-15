@@ -165,7 +165,7 @@ with gr.Blocks(css=css) as demo:
             Image to SFX
         </h2>
         <p style="text-align: center;">
-            Compare MAGNet, AudioLDM2 and AudioGen sound effects generation from image caption.
+            Compare sound effects generation models from image caption.
         </p>
         """)
         
