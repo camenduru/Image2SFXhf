@@ -69,7 +69,8 @@ def get_caption(image_in):
     result = client.predict(
 		image_in,	# filepath  in 'image' Image component
 		"Describe precisely the image in one sentence.",	# str  in 'Question' Textbox component
-		api_name="/answer_question"
+		#api_name="/answer_question"
+        api_name="/predict"
     )
     print(result)
     return result
