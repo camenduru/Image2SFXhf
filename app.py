@@ -65,7 +65,7 @@ def get_caption_from_kosmos(image_in):
     return truncated_caption
 
 def get_caption(image_in):
-    client = Client("https://fffilon-moondream1.hf.space/", hf_token=hf_token)
+    client = Client("https://fffiloni-moondream1.hf.space/", hf_token=hf_token)
     result = client.predict(
 		image_in,	# filepath  in 'image' Image component
 		"Describe precisely the image in one sentence.",	# str  in 'Question' Textbox component
