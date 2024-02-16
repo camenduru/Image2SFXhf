@@ -184,4 +184,4 @@ with gr.Blocks(css=css) as demo:
         concurrency_limit = 2
     )
 
-demo.queue(max_size=10).launch(debug=True)
+demo.queue(max_size=10).launch(debug=True, show_error=True)
